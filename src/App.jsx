@@ -3,44 +3,58 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [username, setUserName] = useState("");
+  //states
+  const [user, setUser] = useState("");
+  const [username, setUsername] = useState("");
+
+  //Hold user's after fetching
   const [userData, setUserData] = useState(null);
 
+  //Fetch the data
   useEffect(() => {
     async function fetchUserData() {
       if (username) {
-        const response = await fetch(
-          `https://api.github.com/users/${username}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setUserData(data);
-        } else {
-          setUserData(null);
+        try{
+          const response = await fetch(
+            `https://api.github.com/users/${username}`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setUserData(data);
+          } else {
+            setUserData(null);
+          }
+        } catch(error){
+          console.error('Error fetching user data: ' + error);
         }
       }
     }
     fetchUserData();
-  }, [username]);
+    
+  },[username]);
 
   return (
     <>
       <h1>Find Github Search </h1>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
+            setUsername(user);
+            console.log("username" + username);
+            e.preventDefault();
         }}
       >
         <input
           type="text"
           name="username"
           id="userName"
-          onChange={(e) => setUserName(e.target.value)}
+          value={user}
+          onChange={(e) => setUser(e.target.value)}
         />
         <button type="submit" value="search">
           Search
         </button>
       </form>
+
       {userData && (
         <div>
           <div className="avatar-profile">
