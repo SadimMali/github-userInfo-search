@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { UserDetails } from "./UserDetails";
+import { UserDetails } from "./components/UserDetails";
+import { SearchUsername } from "./components/SearchUsername";
 
 function App() {
   //states
@@ -32,30 +33,24 @@ function App() {
     fetchUserData();
   }, [username]);
 
+  function handleSearch(e) {
+    setUsername(user);
+    e.preventDefault();
+  }
+
+  function handleChange(e){
+    setUser(e.target.value);
+  }
+
   return (
     <>
       <h1>Find Github Search </h1>
-      <form
-        onSubmit={(e) => {
-          setUsername(user);
-          e.preventDefault();
-        }}
-      >
-        <input
-          type="text"
-          name="username"
-          id="userName"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-        />
-        <button type="submit" value="search">
-          Search
-        </button>
-      </form>
+      <SearchUsername handleSearch={handleSearch} user={user} handleChange={handleChange} />
       
       {userData != null ? (
         <UserDetails
           avatar={userData.avatar_url}
+          username = {username}
           html_url={userData.html_url}
           bio={userData.bio}
           public_repos={userData.public_repos}

@@ -1,17 +1,20 @@
 export const UserDetails = ({
   avatar,
+  username,
   html_url,
   bio,
   public_repos,
   followers,
   joinedAt,
 }) => {
+
+  const formateedJoinedAt = new Date(joinedAt).toLocaleDateString();
   return (
     <>
       <div className="avatar-profile">
         <img src={avatar} alt="" />
         <h3>
-          <a href={html_url} target="_blank" title="view profile"></a>
+          <a href={html_url} target="_blank" title="view profile">{username}</a>
         </h3>
       </div>
 
@@ -30,7 +33,7 @@ export const UserDetails = ({
 
         <div>
           <h4>Joined At</h4>
-          <p>{joinedAt}</p>
+          <p>{formateedJoinedAt}</p>
         </div>
       </div>
     </>
