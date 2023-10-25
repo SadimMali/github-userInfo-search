@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { UserDetails } from "./components/UserDetails";
 import { SearchUsername } from "./components/SearchUsername";
+import { UserDetails } from "./components/UserDetails";
 
 function App() {
   //states
   const [user, setUser] = useState("");
   const [username, setUsername] = useState("");
 
-  //Hold user's after fetching
+  //Hold user's data after fetching
   const [userData, setUserData] = useState(null);
 
   //Fetch the data
@@ -38,24 +37,28 @@ function App() {
     e.preventDefault();
   }
 
-  function handleChange(e){
+  function handleChange(e) {
     setUser(e.target.value);
   }
 
   return (
-    <>
-      <h1>Find Github Search </h1>
-      <SearchUsername handleSearch={handleSearch} user={user} handleChange={handleChange} />
-      
+    <main>
+      <h1 className="heading">Find Github Search </h1>
+      <SearchUsername
+        handleSearch={handleSearch}
+        user={user}
+        handleChange={handleChange}
+      />
+
       {userData != null ? (
         <UserDetails
           avatar={userData.avatar_url}
-          username = {username}
+          username={username}
           html_url={userData.html_url}
           bio={userData.bio}
           public_repos={userData.public_repos}
           followers={userData.followers}
-          joinedAt={new Date (userData.created_at).toLocaleDateString()}
+          joinedAt={new Date(userData.created_at).toLocaleDateString()}
         />
       ) : (
         <UserDetails
@@ -67,7 +70,7 @@ function App() {
           joinedAt={"----"}
         />
       )}
-    </>
+    </main>
   );
 }
 

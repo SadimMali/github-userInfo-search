@@ -7,19 +7,20 @@ export const UserDetails = ({
   followers,
   joinedAt,
 }) => {
-
   return (
     <>
-      <div className="avatar-profile">
-        <img src={avatar} alt="" />
+      <div className="avatar-profile p-2">
+        <img src={avatar} />
         <h3>
-          <a href={html_url} target="_blank" title="view profile">{username}</a>
+          <a href={html_url} target="_blank" title="view profile">
+            {username}
+          </a>
         </h3>
       </div>
 
       <p className="bio">{bio}</p>
 
-      <div className="details-container">
+      <div className="details-container d-flex gap-2">
         <div>
           <h4>Total Repos</h4>
           <p>{public_repos}</p>

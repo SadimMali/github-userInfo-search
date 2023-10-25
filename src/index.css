@@ -1,0 +1,83 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  background-color: #111b21;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+main {
+  background-color: #161616;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 0 auto;
+  max-width: 600px;
+  border: 1px solid #202c33;
+  border-radius: 10px;
+}
+.heading {
+  margin-bottom: 20px;
+}
+
+.d-flex {
+  display: flex;
+}
+.gap-2 {
+  gap: 20px;
+}
+.p-2 {
+  padding: 20px;
+}
+/* SearchUsername */
+
+form {
+  margin-top: 20px;
+  border-bottom: 1px solid #30363d;
+}
+form input:first-child {
+  width: 100%;
+  background-color: #202c33;
+}
+form button {
+  background-color: #1dcf3e;
+  color: #ffff;
+  padding: 0 20px;
+  cursor: pointer;
+}
+form input,
+button {
+  border: 0;
+  padding: 8px;
+  outline: none;
+  font-size: 1.1rem;
+  transition: all 250ms linear;
+}
+
+/* user details */
+.details-container {
+  align-items: center;
+  justify-content: space-evenly;
+}
+.details-container div {
+  flex-grow: 1;
+  padding: 20px 0;
+}
+div.details-container div:not(:last-of-type) {
+  border-right: 1px solid #30363d;
+}
+.avatar-profile img {
+  width: 150px;
+  border-radius: 50%;
+}
+p.bio {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+h3 a {
+  text-decoration: none;
+  color: aqua;
+}
