@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 import "./App.css";
+import { UserDetails } from "./UserDetails";
 
 function App() {
   //states
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     async function fetchUserData() {
       if (username) {
-        try{
+        try {
           const response = await fetch(
             `https://api.github.com/users/${username}`
           );
@@ -24,23 +24,21 @@ function App() {
           } else {
             setUserData(null);
           }
-        } catch(error){
-          console.error('Error fetching user data: ' + error);
+        } catch (error) {
+          console.error("Error fetching user data: " + error);
         }
       }
     }
     fetchUserData();
-    
-  },[username]);
+  }, [username]);
 
   return (
     <>
       <h1>Find Github Search </h1>
       <form
         onSubmit={(e) => {
-            setUsername(user);
-            console.log("username" + username);
-            e.preventDefault();
+          setUsername(user);
+          e.preventDefault();
         }}
       >
         <input
@@ -54,35 +52,25 @@ function App() {
           Search
         </button>
       </form>
-
-      {userData && (
-        <div>
-          <div className="avatar-profile">
-            <img src={userData.avatar_url} alt="" />
-            <h3>
-              <a href="/" target="_blank" title="view profile"></a>
-            </h3>
-          </div>
-
-          <p className="bio">{userData.bio}</p>
-
-          <div className="details-container">
-            <div>
-              <h4>Total Repos</h4>
-              <p>{userData.public_repos}</p>
-            </div>
-
-            <div>
-              <h4>Followers</h4>
-              <p>{userData.followers}</p>
-            </div>
-
-            <div>
-              <h4>Joined At</h4>
-              <p>{userData.created_at}</p>
-            </div>
-          </div>
-        </div>
+      
+      {userData != null ? (
+        <UserDetails
+          avatar={userData.avatar_url}
+          html_url={userData.html_url}
+          bio={userData.bio}
+          public_repos={userData.public_repos}
+          followers={userData.followers}
+          joinedAt={userData.created_at}
+        />
+      ) : (
+        <UserDetails
+          avatar={""}
+          html_url={""}
+          bio={""}
+          public_repos={"----"}
+          followers={"----"}
+          joinedAt={"----"}
+        />
       )}
     </>
   );
