@@ -8,7 +8,6 @@ export const UserDetails = ({
   joinedAt,
 }) => {
 
-  const formateedJoinedAt = new Date(joinedAt).toLocaleDateString();
   return (
     <>
       <div className="avatar-profile">
@@ -33,7 +32,7 @@ export const UserDetails = ({
 
         <div>
           <h4>Joined At</h4>
-          <p>{formateedJoinedAt}</p>
+          <p>{joinedAt}</p>
         </div>
       </div>
     </>

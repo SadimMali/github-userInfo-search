@@ -55,7 +55,7 @@ function App() {
           bio={userData.bio}
           public_repos={userData.public_repos}
           followers={userData.followers}
-          joinedAt={userData.created_at}
+          joinedAt={new Date (userData.created_at).toLocaleDateString()}
         />
       ) : (
         <UserDetails
