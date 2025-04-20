@@ -6,9 +6,14 @@ function App() {
   //states
   const [user, setUser] = useState("");
   const [username, setUsername] = useState("");
+  const [isError, setISError] = useState(false);
 
   //Hold user's data after fetching
   const [userData, setUserData] = useState(null);
+
+  console.log(userData);
+
+  console.log(userData);
 
   //Fetch the data
   useEffect(() => {
@@ -20,9 +25,11 @@ function App() {
           );
           if (response.ok) {
             const data = await response.json();
+            setISError(false);
             setUserData(data);
           } else {
             setUserData(null);
+            setISError(true);
           }
         } catch (error) {
           console.error("Error fetching user data: " + error);
@@ -50,26 +57,20 @@ function App() {
         handleChange={handleChange}
       />
 
-      {userData != null ? (
-        <UserDetails
-          avatar={userData.avatar_url}
-          username={username}
-          html_url={userData.html_url}
-          bio={userData.bio}
-          public_repos={userData.public_repos}
-          followers={userData.followers}
-          joinedAt={new Date(userData.created_at).toLocaleDateString()}
-        />
-      ) : (
-        <UserDetails
-          avatar={""}
-          html_url={""}
-          bio={""}
-          public_repos={"----"}
-          followers={"----"}
-          joinedAt={"----"}
-        />
-      )}
+      <UserDetails
+        avatar={userData?.avatar_url || ""}
+        username={username}
+        html_url={userData?.html_url || ""}
+        bio={userData?.bio || ""}
+        public_repos={userData?.public_repos || "----"}
+        followers={userData?.followers.toString() || "----"}
+        joinedAt={
+          userData?.created_at
+            ? new Date(userData.created_at).toLocaleDateString()
+            : "----"
+        }
+        isError={isError}
+      />
     </main>
   );
 }

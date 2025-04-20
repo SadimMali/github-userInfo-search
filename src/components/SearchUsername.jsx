@@ -8,6 +8,7 @@ export const SearchUsername = ({ handleSearch, user, handleChange }) => {
         placeholder="GitHub username"
         value={user}
         onChange={handleChange}
+        style={{color: 'white'}}
       />
       <button type="submit" value="search">
         Search

@@ -1,3 +1,5 @@
+import { DetailItem } from "./DetailItem";
+
 export const UserDetails = ({
   avatar,
   username,
@@ -6,13 +8,24 @@ export const UserDetails = ({
   public_repos,
   followers,
   joinedAt,
+  isError,
 }) => {
+  if (isError) {
+    return <p style={{ marginTop: "20px" }}>User not found</p>;
+  }
+
+  console.log(followers);
+
   return (
     <>
       <div className="avatar-profile p-2">
-        <img src={avatar} />
+        {avatar && <img src={avatar} alt={`${username}'s avatar`} />}
         <h3>
-          <a href={html_url} target="_blank" title="view profile">
+          <a
+            href={html_url}
+            target="_blank"
+            title="View profile"
+          >
             {username}
           </a>
         </h3>
@@ -21,20 +34,9 @@ export const UserDetails = ({
       <p className="bio">{bio}</p>
 
       <div className="details-container d-flex gap-2">
-        <div>
-          <h4>Total Repos</h4>
-          <p>{public_repos}</p>
-        </div>
-
-        <div>
-          <h4>Followers</h4>
-          <p>{followers}</p>
-        </div>
-
-        <div>
-          <h4>Joined At</h4>
-          <p>{joinedAt}</p>
-        </div>
+        <DetailItem title="Total Repos" value={public_repos} />
+        <DetailItem title="Followers" value={followers} />
+        <DetailItem title="Joined At" value={joinedAt} />
       </div>
     </>
   );
